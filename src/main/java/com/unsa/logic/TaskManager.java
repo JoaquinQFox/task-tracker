@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.unsa.objects.Task;
@@ -17,7 +17,7 @@ public class TaskManager {
     private final List<Task> tasksList;
 
     public TaskManager() {
-        tasksList = new ArrayList<>();
+        tasksList = new LinkedList<>();
     }
 
     // Method to read the first argument and action of the command
