@@ -16,16 +16,54 @@ public class Task {
     }
 
     public Task(String description) {
-        this.id = setGlobalId();
+        this.id = globalId();
         this.description = description;
         this.status = TaskStatus.TO_DO;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    private int setGlobalId() {
+    public Task(int id, String description, TaskStatus status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        updateGlobalId(id);
+        this.description = description;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public static Task taskFromJson(String jsonText) {
+        int id = Integer.parseInt(getJsonValue("id", jsonText));
+        String description = getJsonString("description", jsonText);
+        TaskStatus status = TaskStatus.valueOf(getJsonString("status", jsonText));
+        LocalDateTime createdAt = LocalDateTime.parse(getJsonString("createdAt", jsonText));
+        LocalDateTime updatedAt = LocalDateTime.parse(getJsonString("updatedAt", jsonText));
+        return new Task(id, description, status, createdAt, updatedAt);
+    }
+
+    private static String getJsonValue(String field, String jsonText) {
+        String pattern = "\"" + field + "\":";
+        int start = jsonText.indexOf(pattern) + pattern.length();
+        int end = jsonText.indexOf(",", start);
+        if (end == -1)
+            end = jsonText.indexOf("}");
+        return jsonText.substring(start, end);
+    }
+
+    private static String getJsonString(String field, String jsonText) {
+        String pattern = "\"" + field + "\":\"";
+        int start = jsonText.indexOf(pattern) + pattern.length();
+        int end = jsonText.indexOf("\"", start);
+        return jsonText.substring(start, end);
+    }
+
+    private int globalId() {
         globalId++;
         return globalId;
+    }
+
+    private void updateGlobalId(int id) {
+        globalId = id++;
     }
 
     public String toJson() {
