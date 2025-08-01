@@ -19,5 +19,8 @@ buildNumber.properties
 # OutputTest
 jsonTest/
 
+# Test classes
+tests/
+
 # vsCode
 .vscode/
