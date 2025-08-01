@@ -57,4 +57,12 @@ public class Task {
     public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
 }
