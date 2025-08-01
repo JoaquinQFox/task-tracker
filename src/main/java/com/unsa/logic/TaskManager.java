@@ -1,6 +1,8 @@
 package com.unsa.logic;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -65,7 +67,31 @@ public class TaskManager {
     }
 
     public void readTasks() {
+        try {
+            if (!verifyFolder()) {
+                return;
+            }
 
+            try (BufferedReader fileReader = new BufferedReader(new FileReader(filePath))) {
+                String jsonText = "";
+                String line;
+
+                while ((line = fileReader.readLine()) != null) {
+                    jsonText +=  line.trim();
+                }
+
+                jsonText = jsonText.substring(1, jsonText.length() - 1);
+
+                String[] tasksInJson = jsonText.split("(?<=\\}),(?=\\{)");
+
+                for (String str : tasksInJson) {
+                    System.out.println(str);
+                }
+                
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     // Method to save tasks into a json file
@@ -89,11 +115,13 @@ public class TaskManager {
         }
     }
 
-    // Method that creates the folder of json file if it doesn't exists already
-    public void verifyFolder() throws IOException {
+    // Method that creates the folder of json file if it doesn't exists already and return if it existed
+    public boolean verifyFolder() throws IOException {
         File folder = new File(folderPath);
         if (!folder.exists()) {
             folder.mkdirs();
+            return false;
         }
+        return true;
     }
 }
