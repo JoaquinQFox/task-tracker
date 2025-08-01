@@ -5,7 +5,7 @@ public enum  TaskStatus {
 
     public String getStatus() {
         return switch (this) {
-            case TO_DO -> "small";
+            case TO_DO -> "to do";
             case IN_PROGRESS -> "in progress";
             case DONE -> "done";
             default -> null;
