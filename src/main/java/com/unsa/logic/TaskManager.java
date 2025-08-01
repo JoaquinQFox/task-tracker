@@ -31,7 +31,7 @@ public class TaskManager {
         switch (action) {
             case "add" -> addTask(input);
             case "update" -> System.out.println("Task updated succesfully (ID:1)");
-            case "delete" -> System.out.println("Task deleted succesfully");
+            case "delete" -> deleteTask(input);
             case "list" -> System.out.println("Tasks listed");
             default -> System.out.println("Action not recognized");
         }
@@ -60,6 +60,36 @@ public class TaskManager {
             System.out.println("You gotta send the command with a description");
             System.out.println("Description muste be encolsed with quotation marks if there are more than one word");
             System.out.println("Example: add \"Your description\"");
+            return false;
+        }
+
+        return true;
+    }
+
+    // Method to delete a task with the id entered
+    public void deleteTask(String[] input) {
+        if (checkDeleteCommand(input)) {
+            int id = Integer.parseInt(input[1]);
+            if (tasksList.remove(new Task(id, null, null, null, null))) {
+                System.out.println("ID deleted succesfully");
+            }
+            else {
+                System.out.println("Task with Id:" + id + " not found");
+            }
+        }
+    }
+
+    // Method to check the correct usage of delte command
+    public boolean checkDeleteCommand(String[] input) {
+        if (input.length > 2) {
+            System.out.println("There must only be two arguments");
+            System.out.println("Example: delete [id]");
+            return false;
+        }
+
+        if (input.length < 2) {
+            System.out.println("You gotta specify the id of the task you want to delete");
+            System.out.println("Example: delete [id]");
             return false;
         }
 
