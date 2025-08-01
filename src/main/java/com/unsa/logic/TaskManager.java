@@ -19,7 +19,7 @@ public class TaskManager {
     }
 
     // Method to read the first argument and action of the command
-    public void readAction(String[] input) {
+    public void readCommand(String[] input) {
         String action = input[0];
 
         if (action.startsWith("mark")) {
