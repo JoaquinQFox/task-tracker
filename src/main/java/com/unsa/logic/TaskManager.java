@@ -10,23 +10,16 @@ import java.util.List;
 import com.unsa.objects.Task;
 
 public class TaskManager {
-    static List<Task> tasks = new ArrayList<>();
-    static String folderPath = "jsonTest";
-    static String filePath = "jsonTest/tasks.json";
+    private final String folderPath = "jsonTest";
+    private final String filePath = "jsonTest/tasks.json";
+    private final List<Task> tasksList;
 
-    public static void main(String[] args) {
-        System.out.println(args[0]);
-        System.out.println(args[1]);
-        readAction(args);
-        System.out.println("List: " + tasks);
-        tasks.add(new Task("comida"));
-        tasks.add(new Task("comida"));
-        tasks.add(new Task("comida"));
-        saveTasks(tasks);
+    public TaskManager() {
+        tasksList = new ArrayList<>();
     }
 
     // Method to read the first argument and action of the command
-    public static void readAction(String[] input) {
+    public void readAction(String[] input) {
         String action = input[0];
 
         if (action.startsWith("mark")) {
@@ -44,17 +37,17 @@ public class TaskManager {
 
 
     // Method to add a new Task to the list of tasks
-    public static void addTask(String[] input) {
+    public void addTask(String[] input) {
         if (checkAddCommand(input)) {
             String description = input[1];
             Task task = new Task(description);
 
-            tasks.add(task);
+            this.tasksList.add(task);
         }
     }
 
     // Method to check the correct usage of the add command
-    public static boolean checkAddCommand(String[] input) {
+    public boolean checkAddCommand(String[] input) {
         if (input.length > 2) {
             System.out.println("There must only be two arguments");
             System.out.println("Example: add \"Your description\"");
@@ -71,22 +64,22 @@ public class TaskManager {
         return true;
     }
 
-    public static void readTasks() {
+    public void readTasks() {
 
     }
 
     // Method to save tasks into a json file
-    public static void saveTasks(List<Task> tasks) {
+    public void saveTasks() {
         try {
             verifyFolder();
             try (Writer fileWriter = new FileWriter(filePath)) {
                 fileWriter.write("[\n");
 
-                for (int i = 0; i < tasks.size(); i++) {
-                    if (i < tasks.size() - 1)
-                        fileWriter.write("\t" + tasks.get(i).toJson() + ",\n");
+                for (int i = 0; i < this.tasksList.size(); i++) {
+                    if (i < this.tasksList.size() - 1)
+                        fileWriter.write("\t" + this.tasksList.get(i).toJson() + ",\n");
                     else
-                        fileWriter.write("\t" + tasks.get(i).toJson() + "\n");
+                        fileWriter.write("\t" + this.tasksList.get(i).toJson() + "\n");
                 }
 
                 fileWriter.write("]\n");
@@ -97,7 +90,7 @@ public class TaskManager {
     }
 
     // Method that creates the folder of json file if it doesn't exists already
-    public static void verifyFolder() throws IOException {
+    public void verifyFolder() throws IOException {
         File folder = new File(folderPath);
         if (!folder.exists()) {
             folder.mkdirs();
