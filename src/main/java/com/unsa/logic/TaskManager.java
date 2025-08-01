@@ -66,6 +66,7 @@ public class TaskManager {
         return true;
     }
 
+    // Method to read tasks from json file if it exists
     public void readTasks() {
         try {
             if (!verifyFolder()) {
@@ -85,9 +86,8 @@ public class TaskManager {
                 String[] tasksInJson = jsonText.split("(?<=\\}),(?=\\{)");
 
                 for (String str : tasksInJson) {
-                    System.out.println(str);
+                    tasksList.add(Task.taskFromJson(str));
                 }
-                
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
