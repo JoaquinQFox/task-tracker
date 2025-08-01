@@ -33,8 +33,8 @@ public class Task {
             "\"id\":" + getId() + "," + 
             "\"description\":" + "\"" + getDescription() + "\"," +
             "\"status\":" + "\"" + status.name() + "\"," +
-            "\"createdAt\":" + getCreatedAt() + "," +
-            "\"updatedAt\":" + getUpdatedAt() +
+            "\"createdAt\":\"" + getCreatedAt() + "\"," +
+            "\"updatedAt\":\"" + getUpdatedAt() + "\"" + 
             "}";
     }
 
