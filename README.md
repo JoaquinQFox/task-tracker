@@ -2,13 +2,17 @@
 
 This is a simple command line interface (CLI) application to manage tasks.
 
+## Roadmap
+This project was made following the description the roadmap page.
+**Url roadmap project**: https://roadmap.sh/projects/task-tracker
+
+
 ## Features
 - **Add a task:** Add a new task with a description.
 - **Update a task:** Update a task with a new description.
 - **Delete a task:** Delete a task by it's ID
 - **Mark a task:** Mark a task as "todo", "in-progress" or "done".
 - **List tasks:** List all tasks with status specified or all in general.
-
 # Installation
 
 1. **Clone the repository:**
