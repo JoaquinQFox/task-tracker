@@ -45,6 +45,7 @@ public class TaskManager {
             Task task = new Task(description);
 
             this.tasksList.add(task);
+            System.out.println("Task added succesfully (ID: " + task.getId() + ")");
         }
     }
 
@@ -71,15 +72,15 @@ public class TaskManager {
         if (checkDeleteCommand(input)) {
             int id = Integer.parseInt(input[1]);
             if (tasksList.remove(new Task(id, null, null, null, null))) {
-                System.out.println("ID deleted succesfully");
+                System.out.println("Task deleted succesfully");
             }
             else {
-                System.out.println("Task with Id:" + id + " not found");
+                System.out.println("Task id not found");
             }
         }
     }
 
-    // Method to check the correct usage of delte command
+    // Method to check the correct usage of delete command
     public boolean checkDeleteCommand(String[] input) {
         if (input.length > 2) {
             System.out.println("There must only be two arguments");
@@ -96,6 +97,7 @@ public class TaskManager {
         return true;
     }
 
+    // Method to update the task with the id entered
     public void updateTask(String[] input) {
         if (checkUpdateCommand(input)) {
             int id = Integer.parseInt(input[1]);
@@ -118,6 +120,7 @@ public class TaskManager {
         }
     }
 
+    // Method to chekc the correct usage of update command
     public boolean checkUpdateCommand(String[] input) {
         if (input.length > 3) {
             System.out.println("There must be three arguments");
