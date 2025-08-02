@@ -2,7 +2,7 @@ package com.unsa.cli;
 
 import com.unsa.logic.TaskManager;
 
-public class MainApp {
+public class TaskCLI {
     public static void main(String[] args) {
         TaskManager taskManager = new TaskManager();
         taskManager.readTasks();
