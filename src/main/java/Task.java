@@ -109,7 +109,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task: ID:" + getId() + ", Description: " + getDescription() + ", Status: " + getStatus();
+        return "Task: ID:" + getId() + ", Description: " + getDescription() + ", Status: " + getStatus() +
+            ", created at: " + this.createdAt + ", updated at: "  + this.updatedAt;
     }
 
     @Override
