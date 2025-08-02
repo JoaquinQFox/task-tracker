@@ -26,7 +26,8 @@ public class TaskManager {
         String action = input[0];
 
         if (action.startsWith("mark")) {
-            System.out.println("Task marked succesfully (ID:1)");
+            markTask(input);
+            return;
         }
 
         switch (action) {
@@ -133,6 +134,71 @@ public class TaskManager {
             System.out.println("You gotta specify the id of the updated task and the new description");
             System.out.println("Example: update [id] \"Your description\"");
             return false;
+        }
+
+        return true;
+    }
+
+    // Method to update the status of the task with the id entered
+    private void markTask(String[] input) {
+        if (!checkMarkCommand(input))
+            return;
+        
+        String markCommand = input[0];
+        String markStatus = getMarkCommandStatus(markCommand);
+        TaskStatus taskStatus = TaskStatus.NONE;
+
+        switch (markStatus) {
+                case "todo" -> taskStatus = TaskStatus.TO_DO;
+                case "in-progress" -> taskStatus = TaskStatus.IN_PROGRESS;
+                case "done" -> taskStatus = TaskStatus.DONE;
+        }
+
+        int id = Integer.parseInt(input[1]);
+        Task taskUpdated = null;
+        for (Task task : tasksList) {
+            if (task.getId() == id) {
+                taskUpdated = task;
+                break;
+            }
+        }
+
+        if (taskUpdated != null) {
+            taskUpdated.setStatus(taskStatus);
+            System.out.println("Task updated succesfully");
+        }
+        else 
+            System.out.println("Task id not found");
+    }
+
+    // Method to verify the corract usage of mark command
+    private String getMarkCommandStatus(String markCommand) {
+        String pattern = "mark-";
+        int start = markCommand.indexOf(pattern) + pattern.length();
+        return markCommand.substring(start);
+    }
+
+    private boolean checkMarkCommand(String[] input) {
+        if (input.length > 2) {
+            System.out.println("List command incorrectly used");
+            System.out.println("Example: mark-[status] [id]");
+            System.out.println("status options: [todo, in-progress, done]");
+            return false;
+        }
+
+        if (input.length == 2) {
+            String markCommand = input[0];
+            String markStatus = getMarkCommandStatus(markCommand);
+
+            if (!markStatus.equals("todo") && !markStatus.equals("in-progress") && !markStatus.equals("done")) {
+                System.out.println("Incorrect status command");
+                System.out.println("status options: [todo, in-progress, done]");
+                return false;
+            }
+        }
+        else {
+            System.out.println("Incorrect status command");
+            System.out.println("status options: [todo, in-progress, done]");
         }
 
         return true;
