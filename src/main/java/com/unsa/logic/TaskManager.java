@@ -40,7 +40,7 @@ public class TaskManager {
 
 
     // Method to add a new Task to the list of tasks
-    public void addTask(String[] input) {
+    private void addTask(String[] input) {
         if (checkAddCommand(input)) {
             String description = input[1];
             Task task = new Task(description);
@@ -51,7 +51,7 @@ public class TaskManager {
     }
 
     // Method to check the correct usage of the add command
-    public boolean checkAddCommand(String[] input) {
+    private boolean checkAddCommand(String[] input) {
         if (input.length > 2) {
             System.out.println("There must only be two arguments");
             System.out.println("Example: add \"Your description\"");
@@ -69,7 +69,7 @@ public class TaskManager {
     }
 
     // Method to delete a task with the id entered
-    public void deleteTask(String[] input) {
+    private void deleteTask(String[] input) {
         if (checkDeleteCommand(input)) {
             int id = Integer.parseInt(input[1]);
             if (tasksList.remove(new Task(id, null, null, null, null))) {
@@ -82,7 +82,7 @@ public class TaskManager {
     }
 
     // Method to check the correct usage of delete command
-    public boolean checkDeleteCommand(String[] input) {
+    private boolean checkDeleteCommand(String[] input) {
         if (input.length > 2) {
             System.out.println("There must only be two arguments");
             System.out.println("Example: delete [id]");
@@ -99,7 +99,7 @@ public class TaskManager {
     }
 
     // Method to update the task with the id entered
-    public void updateTask(String[] input) {
+    private void updateTask(String[] input) {
         if (checkUpdateCommand(input)) {
             int id = Integer.parseInt(input[1]);
             String description = input[2];
@@ -122,7 +122,7 @@ public class TaskManager {
     }
 
     // Method to chekc the correct usage of update command
-    public boolean checkUpdateCommand(String[] input) {
+    private boolean checkUpdateCommand(String[] input) {
         if (input.length > 3) {
             System.out.println("There must be three arguments");
             System.out.println("Example: update [id] \"Your description\"");
@@ -139,7 +139,7 @@ public class TaskManager {
     }
 
     // Method general to list tasks
-    public void listTasks(String[] input) {
+    private void listTasks(String[] input) {
         if (!checkListCommand(input)) {
             return;
         }
@@ -186,7 +186,7 @@ public class TaskManager {
     }
 
     // Method to check the correct usage of list command
-    public boolean checkListCommand(String[] input) {
+    private boolean checkListCommand(String[] input) {
         if (input.length > 2) {
             System.out.println("List command incorrectly used");
             System.out.println("Example: list [status](optional)");
@@ -256,7 +256,7 @@ public class TaskManager {
     }
 
     // Method that creates the folder of json file if it doesn't exists already and return if it existed
-    public boolean verifyFolder() throws IOException {
+    private boolean verifyFolder() throws IOException {
         File folder = new File(folderPath);
         if (!folder.exists()) {
             folder.mkdirs();
