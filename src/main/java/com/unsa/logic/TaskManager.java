@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.unsa.objects.Task;
+import com.unsa.objects.TaskStatus;
 
 public class TaskManager {
     private final String folderPath = "jsonTest";
@@ -32,7 +33,7 @@ public class TaskManager {
             case "add" -> addTask(input);
             case "update" -> updateTask(input);
             case "delete" -> deleteTask(input);
-            case "list" -> System.out.println("Tasks listed");
+            case "list" -> listTasks(input);
             default -> System.out.println("Action not recognized");
         }
     }
@@ -132,6 +133,72 @@ public class TaskManager {
             System.out.println("You gotta specify the id of the updated task and the new description");
             System.out.println("Example: update [id] \"Your description\"");
             return false;
+        }
+
+        return true;
+    }
+
+    // Method to update the task with the id entered
+    public void listTasks(String[] input) {
+        if (!checkListCommand(input)) {
+            return;
+        }
+
+        TaskStatus taskStatus = TaskStatus.NONE;
+
+        if (input.length == 2) {
+            String status = input[1]; 
+            switch (status) {
+                case "todo" -> taskStatus = TaskStatus.TO_DO;
+                case "in-progress" -> taskStatus = TaskStatus.IN_PROGRESS;
+                case "done" -> taskStatus = TaskStatus.DONE;
+            }
+        }
+
+        if (taskStatus != TaskStatus.NONE)
+            listAllTasks(taskStatus);
+        else
+            listAllTasks();
+    }
+
+    private void listAllTasks() {
+        if (tasksList.isEmpty()) {
+            System.out.println("You don't have any task");
+            return;
+        }
+
+        for (Task task : tasksList)
+            System.out.println(task);
+    }
+
+    private void listAllTasks(TaskStatus status) {
+        boolean empty = true;
+        for (Task task : tasksList) {
+            if (task.getTaskStatus() == status) {
+                System.out.println(task);
+                empty = false;
+            }
+        }
+        if (empty)
+            System.out.println("Currently you don't have any task with " + status.getStatus() + " status");
+    }
+
+    // Method to check the correct usage of list command
+    public boolean checkListCommand(String[] input) {
+        if (input.length > 2) {
+            System.out.println("List command incorrectly used");
+            System.out.println("Example: list [status](optional)");
+            System.out.println("status options: [todo, in-progress, done]");
+            return false;
+        }
+
+        if (input.length == 2) {
+            String taskStatus = input[1];
+            if (!taskStatus.equals("todo") && !taskStatus.equals("in-progress") && !taskStatus.equals("done")) {
+                System.out.println("Incorrect status command");
+                System.out.println("status options: [todo, in-progress, done]");
+                return false;
+            }
         }
 
         return true;
