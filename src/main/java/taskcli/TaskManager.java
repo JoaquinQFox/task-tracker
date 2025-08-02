@@ -1,4 +1,4 @@
-package com.unsa.logic;
+package taskcli;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.unsa.objects.Task;
-import com.unsa.objects.TaskStatus;
 
 public class TaskManager {
     private final String folderPath = "jsonTest";

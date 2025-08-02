@@ -1,6 +1,4 @@
-package com.unsa.cli;
-
-import com.unsa.logic.TaskManager;
+package taskcli;
 
 public class TaskCLI {
     public static void main(String[] args) {

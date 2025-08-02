@@ -1,4 +1,4 @@
-package com.unsa.objects;
+package taskcli;
 
 public enum  TaskStatus {
     NONE, TO_DO, IN_PROGRESS, DONE;
