@@ -138,7 +138,7 @@ public class TaskManager {
         return true;
     }
 
-    // Method to update the task with the id entered
+    // Method general to list tasks
     public void listTasks(String[] input) {
         if (!checkListCommand(input)) {
             return;
@@ -161,6 +161,7 @@ public class TaskManager {
             listAllTasks();
     }
 
+    // Private method to list all tasks in list
     private void listAllTasks() {
         if (tasksList.isEmpty()) {
             System.out.println("You don't have any task");
@@ -170,7 +171,8 @@ public class TaskManager {
         for (Task task : tasksList)
             System.out.println(task);
     }
-
+    
+    // Private method to list all task with a certain status
     private void listAllTasks(TaskStatus status) {
         boolean empty = true;
         for (Task task : tasksList) {
