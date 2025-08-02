@@ -30,7 +30,7 @@ public class TaskManager {
 
         switch (action) {
             case "add" -> addTask(input);
-            case "update" -> System.out.println("Task updated succesfully (ID:1)");
+            case "update" -> updateTask(input);
             case "delete" -> deleteTask(input);
             case "list" -> System.out.println("Tasks listed");
             default -> System.out.println("Action not recognized");
@@ -90,6 +90,44 @@ public class TaskManager {
         if (input.length < 2) {
             System.out.println("You gotta specify the id of the task you want to delete");
             System.out.println("Example: delete [id]");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void updateTask(String[] input) {
+        if (checkUpdateCommand(input)) {
+            int id = Integer.parseInt(input[1]);
+            String description = input[2];
+
+            Task taskToUpdate = null;
+            for (Task task : tasksList) {
+                if (task.getId() == id) {
+                    taskToUpdate = task;
+                    break;
+                }
+            }
+
+            if (taskToUpdate != null) {
+                taskToUpdate.setDescription(description);
+                System.out.println("Task updated succesfully (ID: " + id + ")");
+            }
+            else 
+                System.out.println("Task with Id:" + id + " not found");
+        }
+    }
+
+    public boolean checkUpdateCommand(String[] input) {
+        if (input.length > 3) {
+            System.out.println("There must be three arguments");
+            System.out.println("Example: update [id] \"Your description\"");
+            return false;
+        }
+
+        if (input.length < 3) {
+            System.out.println("You gotta specify the id of the updated task and the new description");
+            System.out.println("Example: update [id] \"Your description\"");
             return false;
         }
 
