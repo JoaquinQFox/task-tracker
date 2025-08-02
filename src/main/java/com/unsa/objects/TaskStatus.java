@@ -1,7 +1,7 @@
 package com.unsa.objects;
 
 public enum  TaskStatus {
-    TO_DO, IN_PROGRESS, DONE;
+    NONE, TO_DO, IN_PROGRESS, DONE;
 
     public String getStatus() {
         return switch (this) {
