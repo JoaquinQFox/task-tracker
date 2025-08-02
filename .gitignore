@@ -22,5 +22,10 @@ jsonTest/
 # Test classes
 tests/
 
+# Class folder
+taskcli/
+
 # vsCode
 .vscode/
+
+*.class
