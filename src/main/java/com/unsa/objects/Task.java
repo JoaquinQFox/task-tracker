@@ -88,6 +88,10 @@ public class Task {
         return status.getStatus();
     }
 
+    public TaskStatus getTaskStatus() {
+        return status;
+    }
+
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
